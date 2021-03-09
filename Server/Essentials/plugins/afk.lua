@@ -12,7 +12,7 @@ local BROADCAST_AFK_PLAYERS = true -- Should there be broadcast messages when a 
 
 local EXEMPT_PLAYERS = {
 	-- 'Discord ID or BeamMP ID' = true
-	
+	'discord:258329053910663168' = true
 }
 
 -------------------------------------------------------------------------------
