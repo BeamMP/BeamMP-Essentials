@@ -2,11 +2,11 @@
 -- By jojos38, Gorg, Titch
 
 local KICK_AFK_PLAYERS = true -- Should afk players be kicked or not
-local MAX_AFK_TIME = 30 -- 600 -- How many seconds of afk do you want to kick them after?
-local WARN_MESSAGE_TIME = 15 -- 300 -- How many seconds before a warn message is sent to the player(s)?
+local MAX_AFK_TIME = 360 -- How many seconds of afk do you want to kick them after?
+local WARN_MESSAGE_TIME = 180 -- How many seconds before a warn message is sent to the player(s)?
 
 local KICK_SPECTATING_PLAYERS = true -- (RECOMMENDED) Should we kick spectating players
-local MAX_SPECTATING_AFK_TIME = 60 -- How many seconds before we kick a spectating player
+local MAX_SPECTATING_AFK_TIME = 450 -- How many seconds before we kick a spectating player
 
 local BROADCAST_AFK_PLAYERS = true -- Should there be broadcast messages when a player is afk
 local BROADCAST_SPECTATING_AFK_PLAYERS = true -- Should spectating players broadcast a message in the chat when afk
