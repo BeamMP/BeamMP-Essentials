@@ -1,5 +1,6 @@
 -- AntiAFK Script for BeamMP Servers. (Client Side is Required to work!)
 -- By jojos38, Gorg, Titch
+local config = readYamlFile(pluginPath.."/afk/config.yml")
 
 local KICK_AFK_PLAYERS = true -- Should afk players be kicked or not
 local MAX_AFK_TIME = 360 -- How many seconds of afk do you want to kick them after?
@@ -17,10 +18,6 @@ local EXEMPT_PLAYERS = {
 	-- "discord:258329053910663168",
 	-- "beammp:780"
 }
-
--------------------------------------------------------------------------------
--- DO NOT TOUCH ANYTHING BELOW HERE UNLESS YOU WANT TO CHANGE THE MESSAGES
--------------------------------------------------------------------------------
 
 
 
