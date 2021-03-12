@@ -315,6 +315,8 @@ Parser.parse = function (self)
   }
   push(self.parse_stack, c)
 
+  if not c.token then return nil end
+
   if c.token[1] == "doc" then
     result = self:parseDoc()
   elseif c.token[1] == "-" then

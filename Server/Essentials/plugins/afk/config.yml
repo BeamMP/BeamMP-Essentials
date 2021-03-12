@@ -20,12 +20,12 @@ max-spectating-afk-time: 450
 # Should spectating players broadcast a message in the chat when afk
 broadcast-spectating-afk-players: true
 
-# Should there be broadcast messages when a player is afk
-broadcast-afk-players: true
-
 
 
 #################### OTHER ####################
+# Should there be broadcast messages when a player is afk
+broadcast-afk-players: true
+
 # Players that are exempt from being KICKED
 # Discord ID or BeamMP ID
 # Example:

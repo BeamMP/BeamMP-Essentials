@@ -1,6 +1,6 @@
 --changes the color of the console.
 local function color(fg, bg)
-	if globalConfig.consoleColor then
+	if config.global.consoleColor then
 		if bg then return string.char(27) .. '[' .. tostring(fg) .. ';' .. tostring(bg) .. 'm'
 		else return string.char(27) .. '[' .. tostring(fg) .. 'm'
 		end

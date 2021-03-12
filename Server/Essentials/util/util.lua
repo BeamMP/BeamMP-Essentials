@@ -1,3 +1,5 @@
+-- By jojos38
+
 -- https://gist.github.com/ripter/4270799
 function dump(header, tbl, indentSize, indent)
 	if not indent then indent = 0 end
@@ -34,8 +36,16 @@ end
 
 
 function readYamlFile(filePath)
-	local f = assert(io.open(filePath, "rb"))
-    local content = f:read("*all")
-    f:close()
-    return yaml.eval(content)
+	local success, f = pcall(assert, io.open(filePath, "rb"))
+	if success then
+		if not f then
+			log('e', "Error while loading file "..filePath)
+			return
+		end
+		local content = f:read("*all")
+		f:close()
+		return yaml.eval(content)
+	else
+		return nil
+	end
 end
