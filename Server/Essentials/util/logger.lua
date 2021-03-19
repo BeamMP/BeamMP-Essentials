@@ -1,11 +1,11 @@
 --changes the color of the console.
 local function color(fg, bg)
-	if config.global.consoleColor then
+	-- if config.global. then
 		if bg then return string.char(27) .. '[' .. tostring(fg) .. ';' .. tostring(bg) .. 'm'
 		else return string.char(27) .. '[' .. tostring(fg) .. 'm'
 		end
-	else return ""
-	end
+	-- else return ""
+	-- end
 end
 
 

@@ -1,17 +1,16 @@
 -- AntiAFK Script for BeamMP Servers. (Client Side is Required to work!)
 -- By jojos38, Gorg, Titch
+local config = { afk = {} } -- Temporary
 
-local config = readYamlFile(pluginPath.."/afk/config.yml") or {}
+local KICK_AFK_PLAYERS = config.afk['kick-afk-players'] or true -- Should afk players be kicked or not
+local MAX_AFK_TIME = config.afk['max-afk-time'] or 360 -- How many seconds of afk do you want to kick them after?
+local WARN_MESSAGE_TIME = config.afk['warn-message-time'] or 180 -- How many seconds before a warn message is sent to the player(s)?
 
-local KICK_AFK_PLAYERS = config['kick-afk-players'] or true -- Should afk players be kicked or not
-local MAX_AFK_TIME = config['max-afk-time'] or 360 -- How many seconds of afk do you want to kick them after?
-local WARN_MESSAGE_TIME = config[''] or 180 -- How many seconds before a warn message is sent to the player(s)?
+local KICK_SPECTATING_PLAYERS = config.afk['kick-spectating-players'] or true -- (RECOMMENDED) Should we kick spectating players
+local MAX_SPECTATING_AFK_TIME = config.afk['max-spectating-afk-time'] or 450 -- How many seconds before we kick a spectating player
 
-local KICK_SPECTATING_PLAYERS = config[''] or true -- (RECOMMENDED) Should we kick spectating players
-local MAX_SPECTATING_AFK_TIME = config[''] or 450 -- How many seconds before we kick a spectating player
-
-local BROADCAST_AFK_PLAYERS = config[''] -- Should there be broadcast messages when a player is afk
-local BROADCAST_SPECTATING_AFK_PLAYERS = config[''] -- Should spectating players broadcast a message in the chat when afk
+local BROADCAST_AFK_PLAYERS = config.afk['broadcast-afk-players'] -- Should there be broadcast messages when a player is afk
+local BROADCAST_SPECTATING_AFK_PLAYERS = config.afk['broadcast-spectating-afk-players'] -- Should spectating players broadcast a message in the chat when afk
 
 local EXEMPT_PLAYERS = {
 	-- Discord ID or BeamMP ID, There should be a comma after every line but the last
@@ -75,10 +74,10 @@ local function check()
 	if KICK_AFK_PLAYERS then
 		if vehiclesCount > 0 and autoKickDisable == false then
 			autoKickDisable = true
-			log('i', "At least one vehicle is spawned, afk kick is now enabled")
+			TriggerGlobalEvent('log', 'i', "At least one vehicle is spawned, afk kick is now enabled")
 		elseif vehiclesCount == 0 and autoKickDisable == true then
 			autoKickDisable = false
-			log('i', "No vehicles found, afk kick is disabled")
+			TriggerGlobalEvent('log', 'i', "No vehicles found, afk kick is disabled")
 		end
 	end
 end
@@ -102,7 +101,7 @@ function TimerSystem()
 			-- If kick afk players and there is a least one vehicle and the player is not exempt
 			if kickEnabled then
 				DropPlayer(playerID, 'You have been afk for too long.') -- Bye
-				log('i', "Player "..playerName.." was kicked for being afk")
+				TriggerGlobalEvent('log', 'i', "Player "..playerName.." was kicked for being afk")
 			end
 		elseif afkTime == WARN_MESSAGE_TIME then
 			if kickEnabled then SendChatMessage(playerID, "Warning, you will get kicked in "..maxAfkTime - WARN_MESSAGE_TIME.." seconds if you don't move!") end
@@ -131,7 +130,7 @@ end
 
 
 local function onInit()
-	log('i', "AntiAFK Initialising...")
+	TriggerGlobalEvent('log', 'i', "AntiAFK Initialising...")
 	RegisterEvent("onPlayerJoin",		"onPlayerJoin")
 	RegisterEvent("onPlayerDisconnect", "onPlayerDisconnect")
 	RegisterEvent("onPlayerMoved", 		"onPlayerMoved")
@@ -139,7 +138,7 @@ local function onInit()
 	RegisterEvent("onVehicleSpawned", 	"onVehicleSpawned")
 	RegisterEvent("onChatMessage", 		"onChatMessage")
 	CreateThread("TimerSystem", 1)
-	log('s', "AntiAFK initialized")
+	TriggerGlobalEvent('log', 's', "AntiAFK initialized")
 end
 
 
@@ -147,7 +146,7 @@ end
 function onPlayerJoin(playerID)
 	resetTimer(playerID)
 	if exemptPlayer(playerID) then
-		log('i', "Joined player "..GetPlayerName(playerID).." is exempt from afk kick")
+		TriggerGlobalEvent('log', 'i', "Joined player "..GetPlayerName(playerID).." is exempt from afk kick")
 		SendChatMessage(playerID, "You are exempt from afk kick")
 	end
 end
